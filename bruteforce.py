@@ -13,28 +13,28 @@ def bruteforce(toimport, obj):
                 try:
                     idx += 1
                     obj.extractall(pwd=word)
-                    print("Passwort wurde geknackt! Zeile: " + str(idx))
-                    print("Das Passwort lautet: '" + word.decode() + "'")
-                    print("Benötigte Zeit: %s Sekunden" % (time.time() - start_time))
+                    print("Password has been cracked! Line: " + str(idx))
+                    print("The password is: '" + word.decode() + "'")
+                    print("Time needed: %s seconds" % (time.time() - start_time))
                     return True
                 except:
                     continue
     return False
   
   
-# toimport = "passwörter.txt"
-# zip_file = "schenkels_secret.zip"
-zip_file = input('Geben sie den Namen der ZIP-Datei ein: ') + '.zip'
-toimport = input('Geben sie den Namen der Passwörter Datei ein: ') + '.txt'
+# toimport = "passwords.txt"
+# zip_file = "secret.zip"
+zip_file = input('Enter the name of the ZIP file: ') + '.zip'
+toimport = input('Enter the name of the passwords file: ') + '.txt'
 
 if not zipfile.ZipFile(zip_file):
-    print("Das Passwort konnte nicht geknackt werden! Grund: Die ZIP-Datei konnte nicht gefunden werden.")
+    print("The password could not be cracked! Reason: The ZIP file could not be found.")
 
 obj = zipfile.ZipFile(zip_file)
   
-anzahl = len(list(open(toimport, "rb")))
+length = len(list(open(toimport, "rb")))
   
-print("Die Passwortliste beinhaltet " + str(anzahl) + " Passwörter, welche jetzt ausprobiert werden.")
+print("The password list contains " + str(length) + " passwords, which will be tried now.")
   
 if bruteforce(toimport, obj) == False:
-    print("Das Passwort konnte nicht geknackt werden! Grund: Passwort ist nicht in der Liste.")
+    print("The password could not be cracked! Reason: Password is not in the list.")
